@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XL-TYPE — A shoot 'em up built inside Microsoft Excel</title>
+<meta name="description" content="XL-TYPE is a shoot 'em up built entirely inside Microsoft Excel. Fight five spreadsheet-error bosses, arm formula-inspired power-ups, and save the file.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#06080a">
+<link rel="canonical" href="https://xl-type.com/">
+<link rel="icon" type="image/webp" href="assets/excel-logo.webp">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xl-type.com/">
+<meta property="og:site_name" content="XL-TYPE">
+<meta property="og:title" content="XL-TYPE — A shoot 'em up built inside Microsoft Excel">
+<meta property="og:description" content="XL-TYPE is a shoot 'em up built entirely inside Microsoft Excel. Fight five spreadsheet-error bosses, arm formula-inspired power-ups, and save the file.">
+<meta property="og:image" content="https://xl-type.com/assets/title-screen2.png">
+<meta property="og:image:width" content="1376">
+<meta property="og:image:height" content="674">
+<meta property="og:image:alt" content="XL-Type gameplay — a spaceship battles enemies across an Excel spreadsheet grid">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="XL-TYPE — A shoot 'em up built inside Microsoft Excel">
+<meta name="twitter:description" content="XL-TYPE is a shoot 'em up built entirely inside Microsoft Excel. Fight five spreadsheet-error bosses, arm formula-inspired power-ups, and save the file.">
+<meta name="twitter:image" content="https://xl-type.com/assets/title-screen2.png">
+<meta name="twitter:image:alt" content="XL-Type gameplay — a spaceship battles enemies across an Excel spreadsheet grid">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "XL-TYPE",
+  "url": "https://xl-type.com/",
+  "description": "XL-TYPE is a shoot 'em up built entirely inside Microsoft Excel. Fight five spreadsheet-error bosses, arm formula-inspired power-ups, and save the file.",
+  "image": "https://xl-type.com/assets/title-screen2.png",
+  "genre": "Shoot 'em up",
+  "gamePlatform": "PC",
+  "operatingSystem": "Windows 10, Windows 11",
+  "applicationCategory": "Game",
+  "author": {
+    "@type": "Person",
+    "name": "James Thai"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "url": "https://xl-type.com/XL-Type.xlsm"
+  },
+  "trailer": {
+    "@type": "VideoObject",
+    "name": "XL-Type - An arcade shoot 'em up built inside Microsoft Excel - Release Trailer",
+    "description": "Official trailer for XL-TYPE, a shoot 'em up built entirely inside Microsoft Excel.",
+    "thumbnailUrl": "https://i.ytimg.com/vi/HiMwttel9kA/maxresdefault.jpg",
+    "uploadDate": "2026-07-12",
+    "contentUrl": "https://www.youtube.com/watch?v=HiMwttel9kA",
+    "embedUrl": "https://www.youtube-nocookie.com/embed/HiMwttel9kA"
+  }
+}
+</script>
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#06080a;color:#e9f2ec;font-family:'Chakra Petch',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  ::selection{background:rgba(70,232,136,.28);color:#fff}
+  @keyframes xl-pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+  @keyframes xl-scan{0%{transform:translateY(-100%)}100%{transform:translateY(220%)}}
+  .chrome{background:linear-gradient(180deg,#f6ffff 0%,#c9f3ea 26%,#5ec7b0 45%,#1e5e52 52%,#e8fffb 58%,#8fd8c8 78%,#3d8a77 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 3px 0 rgba(0,0,0,.55)) drop-shadow(0 0 20px rgba(94,231,183,.4))}
+
+  /* hover states (converted from the design's style-hover attributes) */
+  .navlink{font:600 13px 'JetBrains Mono',monospace;color:#93a49a;text-decoration:none;letter-spacing:.03em}
+  .navlink:hover{color:#eaf2ec}
+  .btn-glow{transition:filter .12s,transform .12s}
+  .btn-glow:hover{filter:brightness(1.08);transform:translateY(-1px)}
+  .btn-ghost{transition:background .12s}
+  .btn-ghost:hover{background:rgba(70,232,136,.13)}
+  .winbtn{width:42px;height:32px;display:flex;align-items:center;justify-content:center;color:#9aa79f}
+  .winbtn:hover{background:rgba(255,255,255,.08)}
+  .winbtn-close:hover{background:#e81123;color:#fff}
+  .copybtn{all:unset;cursor:pointer;font:600 11px 'JetBrains Mono',monospace;color:#7d8a81;padding:3px 9px;border:1px solid rgba(255,255,255,.14);border-radius:5px;transition:color .12s,border-color .12s}
+  .copybtn:hover{color:#daffe9;border-color:rgba(120,255,170,.4)}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* responsive */
+  @media (max-width:760px){
+    .grid-2{grid-template-columns:1fr !important}
+    .navlink{display:none}
+    nav{padding:12px 18px !important}
+    .req-row{grid-template-columns:1fr !important;gap:4px !important}
+  }
+</style>
+</head>
+<body>
+
+<div style="min-height:100vh;background-color:#06080a;background-image:radial-gradient(1100px 620px at 50% -6%,rgba(24,63,42,.55),transparent 60%),linear-gradient(rgba(70,232,136,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(70,232,136,.045) 1px,transparent 1px);background-size:100% 100%,34px 34px,34px 34px">
+
+  <!-- ============ NAV ============ -->
+  <nav style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:rgba(6,8,10,.72);backdrop-filter:blur(12px);border-bottom:1px solid rgba(70,232,136,.14)">
+    <a href="#top" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <img src="assets/excel-logo.webp" alt="Excel" style="width:28px;height:28px;display:block">
+      <span style="font:700 20px 'Segoe UI',system-ui,sans-serif;letter-spacing:.01em;color:#eaf2ec">XL-TYPE</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:26px">
+      <a href="#how" class="navlink">HOW IT WORKS</a>
+      <a href="#reactions" class="navlink">REACTIONS</a>
+      <a href="#req" class="navlink">REQUIREMENTS</a>
+      <a href="#download" class="btn-glow" style="display:inline-flex;align-items:center;gap:7px;padding:9px 17px;background:linear-gradient(180deg,#4bed8c,#20bd64);color:#04120a;font:700 13px 'Chakra Petch',sans-serif;text-decoration:none;border-radius:6px;box-shadow:0 0 20px rgba(70,232,136,.3),inset 0 1px 0 rgba(255,255,255,.45)">↓ DOWNLOAD</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header id="top" style="max-width:1120px;margin:0 auto;padding:66px 32px 30px;text-align:center">
+    <h1 class="sr-only">XL-TYPE — A shoot 'em up built entirely inside Microsoft Excel</h1>
+    <div style="display:inline-flex;align-items:center;gap:9px;padding:6px 14px;border:1px solid rgba(70,232,136,.28);border-radius:30px;background:rgba(70,232,136,.06);font:600 12px 'JetBrains Mono',monospace;letter-spacing:.14em;color:#7fe3a6;margin-bottom:26px">
+      SHMUP&nbsp;×&nbsp;SPREADSHEET
+    </div>
+    <img src="assets/logo-transparent.png" alt="XL-TYPE" width="1928" height="544" style="display:block;margin:0 auto;width:min(920px,88vw);height:auto;filter:drop-shadow(0 0 22px rgba(94,231,183,.3))">
+    <p style="margin:22px auto 0;max-width:640px;font:500 clamp(19px,2.4vw,26px)/1.35 'Chakra Petch',sans-serif;color:#cfe0d6">A shoot&nbsp;'em&nbsp;up built <span style="color:#46e888">entirely inside Microsoft Excel</span>.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px">
+      <a href="#download" class="btn-glow" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;background:linear-gradient(180deg,#4bed8c,#1eb85f);color:#04120a;font:700 17px 'Chakra Petch',sans-serif;text-decoration:none;border-radius:8px;box-shadow:0 0 34px rgba(70,232,136,.4),inset 0 1px 0 rgba(255,255,255,.5)">↓ Download the .xlsm</a>
+      <a href="#trailer" class="btn-ghost" style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;background:rgba(70,232,136,.06);color:#daffe9;font:700 17px 'Chakra Petch',sans-serif;text-decoration:none;border-radius:8px;border:1px solid rgba(120,255,170,.3)">▶ Watch the trailer</a>
+    </div>
+  </header>
+
+  <!-- ============ TRAILER / SHOWCASE ============ -->
+  <section id="trailer" style="max-width:1000px;margin:26px auto 0;padding:0 32px 20px">
+    <div style="position:relative;border:1px solid rgba(70,232,136,.22);border-radius:12px;overflow:hidden;background:#04070a;box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(0,0,0,.6),inset 0 0 60px rgba(70,232,136,.05)">
+      <div style="display:flex;align-items:center;gap:0;padding:0;background:#0b0f0d;border-bottom:1px solid rgba(70,232,136,.14)">
+        <span style="display:flex;align-items:center;gap:8px;padding:8px 12px;font:500 11px 'JetBrains Mono',monospace;color:#7d8a81;flex:1">
+          <span style="width:14px;height:14px;border-radius:3px;background:#1f7a44;display:inline-flex;align-items:center;justify-content:center;font:700 9px 'JetBrains Mono',monospace;color:#eafff1">X</span>
+          XL-Type.xlsm — Sheet1 · A1:BR60
+        </span>
+        <span style="display:flex;height:100%">
+          <span class="winbtn">
+            <span style="width:10px;height:1px;background:currentColor;display:block"></span>
+          </span>
+          <span class="winbtn">
+            <span style="width:9px;height:9px;border:1.3px solid currentColor;display:block"></span>
+          </span>
+          <span class="winbtn winbtn-close">
+            <span style="position:relative;width:10px;height:10px;display:block">
+              <span style="position:absolute;top:50%;left:0;width:100%;height:1.3px;background:currentColor;transform:rotate(45deg)"></span>
+              <span style="position:absolute;top:50%;left:0;width:100%;height:1.3px;background:currentColor;transform:rotate(-45deg)"></span>
+            </span>
+          </span>
+        </span>
+      </div>
+      <div id="trailer-stage" style="position:relative;aspect-ratio:2/1;background:#04070a">
+        <button id="trailer-poster" type="button" style="all:unset;cursor:pointer;position:absolute;inset:0;display:block;width:100%;height:100%">
+          <img src="assets/title-screen2.png" alt="XL-Type gameplay screenshot — a spaceship battling enemies across an Excel spreadsheet grid" width="1376" height="674" style="width:100%;height:100%;object-fit:cover;display:block">
+          <span style="position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,0,0,.15),rgba(0,0,0,.5))"></span>
+          <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;width:88px;height:88px;border-radius:50%;background:rgba(70,232,136,.16);border:2px solid rgba(120,255,170,.7);box-shadow:0 0 40px rgba(70,232,136,.5),inset 0 0 20px rgba(70,232,136,.3)">
+            <span style="width:0;height:0;border-left:26px solid #eafff2;border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:7px"></span>
+          </span>
+          <span style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font:600 12px 'JetBrains Mono',monospace;letter-spacing:.1em;color:#daffe9;background:rgba(0,0,0,.55);padding:6px 14px;border-radius:20px;border:1px solid rgba(120,255,170,.3)">▶ PLAY TRAILER</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section id="how" style="max-width:1120px;margin:0 auto;padding:78px 32px 20px">
+    <div style="text-align:center;margin-bottom:44px">
+      <div style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#5cae7f;margin-bottom:12px">// THE MISSION</div>
+      <h2 style="margin:0;font:700 clamp(28px,4.6vw,46px)/1.15 'Chakra Petch',sans-serif;color:#eaf2ec">Can you fix the errors and save the file?</h2>
+    </div>
+    <div class="grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+      <div style="padding:32px 28px;background:linear-gradient(180deg,rgba(18,26,22,.9),rgba(10,15,13,.9));border:1px solid rgba(70,232,136,.16);border-radius:12px">
+        <div style="font:700 12px 'JetBrains Mono',monospace;color:#46e888;margin-bottom:14px;letter-spacing:.05em">=FX()</div>
+        <h3 style="margin:0 0 10px;font:700 23px 'Chakra Petch',sans-serif;color:#eaf2ec">Weapons ripped from the formula bar</h3>
+        <p style="margin:0;font:400 15px/1.55 'Chakra Petch',sans-serif;color:#93a49a">Arm up with power-ups inspired by real Excel functions — homing shots, spread fire, screen-clearing bombs — every spreadsheet nerd's favourite formulas turned into firepower.</p>
+      </div>
+      <div style="padding:32px 28px;background:linear-gradient(180deg,rgba(18,26,22,.9),rgba(10,15,13,.9));border:1px solid rgba(70,232,136,.16);border-radius:12px">
+        <div style="font:700 12px 'JetBrains Mono',monospace;color:#ff7a59;margin-bottom:14px;letter-spacing:.05em">#ERR!</div>
+        <h3 style="margin:0 0 10px;font:700 23px 'Chakra Petch',sans-serif;color:#eaf2ec">5 Excel error boss fights</h3>
+        <p style="margin:0;font:400 15px/1.55 'Chakra Petch',sans-serif;color:#93a49a">Face down five bosses born from the errors every spreadsheet dreads — #REF!, #SPILL!, #NAME? and more — each with its own attack pattern standing between you and a clean workbook.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REACTIONS ============ -->
+  <section id="reactions" style="max-width:1120px;margin:0 auto;padding:78px 32px 20px">
+    <div style="text-align:center;margin-bottom:44px">
+      <div style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#5cae7f;margin-bottom:12px">// REACTIONS</div>
+      <h2 style="margin:0;font:700 clamp(30px,5vw,52px)/1.05 'Chakra Petch',sans-serif;color:#eaf2ec">Wait, it does what?</h2>
+    </div>
+    <div class="grid-2" style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
+      <figure style="margin:0;padding:26px 24px;background:linear-gradient(180deg,rgba(16,23,20,.95),rgba(9,13,11,.95));border:1px solid rgba(255,255,255,.08);border-left:3px solid #46e888;border-radius:10px">
+        <blockquote style="margin:0;font:600 20px/1.35 'Chakra Petch',sans-serif;color:#eaf2ec">"I can't believe this actually worked!"</blockquote>
+        <figcaption style="margin-top:16px;font:500 13px 'JetBrains Mono',monospace;color:#78857b">— The author</figcaption>
+      </figure>
+      <figure style="margin:0;padding:26px 24px;background:linear-gradient(180deg,rgba(16,23,20,.95),rgba(9,13,11,.95));border:1px solid rgba(255,255,255,.08);border-left:3px solid #46e888;border-radius:10px">
+        <blockquote style="margin:0;font:600 20px/1.35 'Chakra Petch',sans-serif;color:#eaf2ec">"The best game I've ever played in a spreadsheet!"</blockquote>
+        <figcaption style="margin-top:16px;font:500 13px 'JetBrains Mono',monospace;color:#78857b">— Family member</figcaption>
+      </figure>
+      <figure style="margin:0;padding:26px 24px;background:linear-gradient(180deg,rgba(16,23,20,.95),rgba(9,13,11,.95));border:1px solid rgba(255,255,255,.08);border-left:3px solid #46e888;border-radius:10px">
+        <blockquote style="margin:0;font:600 20px/1.35 'Chakra Petch',sans-serif;color:#eaf2ec">"Why did you do this?"</blockquote>
+        <figcaption style="margin-top:16px;font:500 13px 'JetBrains Mono',monospace;color:#78857b">— Close friend</figcaption>
+      </figure>
+      <figure style="margin:0;padding:26px 24px;background:linear-gradient(180deg,rgba(16,23,20,.95),rgba(9,13,11,.95));border:1px solid rgba(255,255,255,.08);border-left:3px solid #46e888;border-radius:10px">
+        <blockquote style="margin:0;font:600 20px/1.35 'Chakra Petch',sans-serif;color:#eaf2ec">"A spreadsheet — the worst imaginable game canvas."</blockquote>
+        <figcaption style="margin-top:16px;font:500 13px 'JetBrains Mono',monospace;color:#78857b">— Claude Opus 4.8</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ REQUIREMENTS ============ -->
+  <section id="req" style="max-width:900px;margin:0 auto;padding:78px 32px 20px">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#5cae7f;margin-bottom:12px">// SYSTEM REQUIREMENTS</div>
+      <h2 style="margin:0;font:700 clamp(30px,5vw,52px)/1.05 'Chakra Petch',sans-serif;color:#eaf2ec">What you need</h2>
+    </div>
+    <div style="border:1px solid rgba(70,232,136,.18);border-radius:12px;overflow:hidden;background:rgba(10,15,13,.7)">
+      <div class="req-row" style="display:grid;grid-template-columns:180px 1fr;gap:0;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.07);align-items:center">
+        <span style="font:700 13px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">OS</span>
+        <span style="font:500 16px 'Chakra Petch',sans-serif;color:#dfe9e2">Windows 10 or 11</span>
+      </div>
+      <div class="req-row" style="display:grid;grid-template-columns:180px 1fr;gap:0;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.07);align-items:center">
+        <span style="font:700 13px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">EXCEL</span>
+        <span style="font:500 16px 'Chakra Petch',sans-serif;color:#dfe9e2">Microsoft 365 or Excel 2016+ <span style="color:#8b988f">(.xlsm support)</span></span>
+      </div>
+      <div class="req-row" style="display:grid;grid-template-columns:180px 1fr;gap:0;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.07);align-items:center">
+        <span style="font:700 13px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">MACROS</span>
+        <span style="font:500 16px 'Chakra Petch',sans-serif;color:#dfe9e2">Enabled <span style="color:#8b988f">(Trust Center → Enable macros)</span></span>
+      </div>
+      <div class="req-row" style="display:grid;grid-template-columns:180px 1fr;gap:0;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.07);align-items:center">
+        <span style="font:700 13px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">RESOLUTION</span>
+        <span style="font:500 16px 'Chakra Petch',sans-serif;color:#dfe9e2">1920×1080 recommended <span style="color:#8b988f">(120-column board)</span></span>
+      </div>
+      <div class="req-row" style="display:grid;grid-template-columns:180px 1fr;gap:0;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.07);align-items:center">
+        <span style="font:700 13px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">CPU</span>
+        <span style="font:500 16px 'Chakra Petch',sans-serif;color:#dfe9e2">A relatively powerful CPU <span style="color:#8b988f">(Excel is not an optimized game engine)</span></span>
+      </div>
+      <div class="req-row" style="display:grid;grid-template-columns:180px 1fr;gap:0;padding:16px 24px;align-items:center">
+        <span style="font:700 13px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">AUDIO</span>
+        <span style="font:500 16px 'Chakra Petch',sans-serif;color:#dfe9e2">Recommended</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DOWNLOAD ============ -->
+  <section id="download" style="max-width:760px;margin:0 auto;padding:78px 32px 40px">
+    <div style="position:relative;text-align:center;padding:48px 34px;border:1px solid rgba(70,232,136,.28);border-radius:16px;background:radial-gradient(700px 300px at 50% 0%,rgba(31,122,68,.28),transparent 70%),linear-gradient(180deg,rgba(14,21,18,.95),rgba(8,12,10,.95));box-shadow:0 0 60px -20px rgba(70,232,136,.4)">
+      <div style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#5cae7f;margin-bottom:14px">// DOWNLOAD</div>
+      <h2 style="margin:0;font:700 clamp(32px,6vw,52px)/1.02 'Chakra Petch',sans-serif;color:#eaf2ec">Get XL-TYPE</h2>
+      <p style="margin:14px auto 0;max-width:420px;font:400 16px/1.5 'Chakra Petch',sans-serif;color:#9fada3">Full game in one macro-enabled workbook.</p>
+      <a href="XL-Type.xlsm" download class="btn-glow" style="display:inline-flex;align-items:center;gap:11px;margin-top:28px;padding:18px 38px;background:linear-gradient(180deg,#4bed8c,#1eb85f);color:#04120a;font:700 19px 'Chakra Petch',sans-serif;text-decoration:none;border-radius:9px;box-shadow:0 0 40px rgba(70,232,136,.45),inset 0 1px 0 rgba(255,255,255,.5)">↓ Download XL-Type.xlsm</a>
+
+      <div style="margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);text-align:left">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between">
+          <span style="font:500 12px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">SHA-256</span>
+          <button id="copy-hash" type="button" class="copybtn">copy</button>
+        </div>
+        <code id="hash-value" style="display:block;margin-top:8px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#9fada3;word-break:break-all;background:#05080699;padding:11px 13px;border:1px solid rgba(255,255,255,.08);border-radius:7px">44ebb4a89fbf4bd2b67cd40091624bc119f467bcbfbbc72993f83ab8eba0b6a3</code>
+        <p style="margin:12px 2px 0;font:400 13px/1.55 'Chakra Petch',sans-serif;color:#93a49a">It's a macro-enabled file — verify the hash before you enable macros. Run <code style="font:400 12px 'JetBrains Mono',monospace;color:#8bd9a8">Get-FileHash .\XL-Type.xlsm -Algorithm SHA256</code> in PowerShell and check it matches.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="border-top:1px solid rgba(70,232,136,.12);margin-top:20px">
+    <div style="max-width:1120px;margin:0 auto;padding:34px 32px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;justify-content:space-between">
+      <div style="max-width:560px">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:12px">
+          <img src="assets/excel-logo.webp" alt="Excel" style="width:24px;height:24px;display:block">
+          <span style="font:700 17px 'Segoe UI',system-ui,sans-serif;color:#eaf2ec">XL-TYPE</span>
+        </div>
+        <p style="margin:0;font:400 12px/1.6 'JetBrains Mono',monospace;color:#6f7c73">An independent fan project. Not affiliated with, endorsed by, or sponsored by Microsoft Corporation.</p>
+      </div>
+      <div style="text-align:right;font:500 12px/1.9 'JetBrains Mono',monospace;color:#6f7c73">
+        <div>© 2026 James Thai</div>
+        <div>GNU GPL v3 or later</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  // Trailer: poster click swaps in a YouTube embed (privacy-enhanced domain, autoplay on click).
+  var YT_ID = 'HiMwttel9kA';
+  var poster = document.getElementById('trailer-poster');
+  var stage = document.getElementById('trailer-stage');
+  poster.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + YT_ID + '?autoplay=1&rel=0&modestbranding=1';
+    f.title = 'XL-Type trailer';
+    f.frameBorder = '0';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.style.cssText = 'width:100%;height:100%;display:block';
+    stage.replaceChild(f, poster);
+  });
+
+  // SHA-256 copy button with a brief "copied" confirmation.
+  var copyBtn = document.getElementById('copy-hash');
+  var hashText = document.getElementById('hash-value').textContent.trim();
+  var copyTimer = null;
+  copyBtn.addEventListener('click', function () {
+    try { if (navigator.clipboard) navigator.clipboard.writeText(hashText); } catch (_) {}
+    copyBtn.textContent = '✓ copied';
+    if (copyTimer) clearTimeout(copyTimer);
+    copyTimer = setTimeout(function () { copyBtn.textContent = 'copy'; }, 1400);
+  });
+})();
+</script>
+</body>
+</html>
