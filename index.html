@@ -53,7 +53,7 @@
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD",
-    "url": "https://xl-type.com/XL-Type-v1.0.zip"
+    "url": "https://xl-type.com/XL-Type-v0.3.zip"
   },
   "trailer": {
     "@type": "VideoObject",
@@ -252,16 +252,32 @@
       <div style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#5cae7f;margin-bottom:14px">// DOWNLOAD</div>
       <h2 style="margin:0;font:700 clamp(32px,6vw,52px)/1.02 'Chakra Petch',sans-serif;color:#eaf2ec">Get XL-TYPE</h2>
       <p style="margin:14px auto 0;max-width:420px;font:400 16px/1.5 'Chakra Petch',sans-serif;color:#9fada3">The game workbook, plus a README with launch instructions, in one zip.</p>
-      <a href="XL-Type-v1.0.zip" download class="btn-glow" style="display:inline-flex;align-items:center;gap:11px;margin-top:28px;padding:18px 38px;background:linear-gradient(180deg,#4bed8c,#1eb85f);color:#04120a;font:700 19px 'Chakra Petch',sans-serif;text-decoration:none;border-radius:9px;box-shadow:0 0 40px rgba(70,232,136,.45),inset 0 1px 0 rgba(255,255,255,.5)">↓ Download XL-Type-v1.0.zip</a>
+      <a href="XL-Type-v0.3.zip" download class="btn-glow" style="display:inline-flex;align-items:center;gap:11px;margin-top:28px;padding:18px 38px;background:linear-gradient(180deg,#4bed8c,#1eb85f);color:#04120a;font:700 19px 'Chakra Petch',sans-serif;text-decoration:none;border-radius:9px;box-shadow:0 0 40px rgba(70,232,136,.45),inset 0 1px 0 rgba(255,255,255,.5)">↓ Download XL-Type-v0.3.zip</a>
 
       <div style="margin-top:30px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);text-align:left">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between">
-          <span style="font:500 12px 'JetBrains Mono',monospace;color:#8bd9a8;letter-spacing:.05em">SHA-256 (of XL-Type-v1.0.xlsm, inside the zip)</span>
-          <button id="copy-hash" type="button" class="copybtn">copy</button>
-        </div>
-        <code id="hash-value" style="display:block;margin-top:8px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#9fada3;word-break:break-all;background:#05080699;padding:11px 13px;border:1px solid rgba(255,255,255,.08);border-radius:7px">b277b11b72162294d9748409f4330dc0fcfd1f03ec522800bd298453820aa680</code>
-        <p style="margin:12px 2px 0;font:400 13px/1.55 'Chakra Petch',sans-serif;color:#93a49a">The workbook inside is macro-enabled — after extracting, verify its hash before you enable macros. Run <code style="font:400 12px 'JetBrains Mono',monospace;color:#8bd9a8">Get-FileHash .\XL-Type-v1.0.xlsm -Algorithm SHA256</code> in PowerShell and check it matches.</p>
-        <p style="margin:10px 2px 0;font:400 13px/1.55 'Chakra Petch',sans-serif;color:#93a49a">Tip: Windows marks downloaded files as untrusted ("Mark of the Web"). Right-click the zip → Properties → check "Unblock" → OK before extracting, so the extracted files open without extra warnings.</p>
+        <div style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.06em;color:#8bd9a8;margin-bottom:16px">BEFORE YOU OPEN IT</div>
+
+        <p style="margin:0 2px 8px;font:600 14px 'Chakra Petch',sans-serif;color:#cfe0d6">1. Unblock the download</p>
+        <ul style="margin:0 0 22px;padding-left:20px;font:400 14px/1.7 'Chakra Petch',sans-serif;color:#93a49a">
+          <li>Right-click <code style="font:400 12px 'JetBrains Mono',monospace;color:#8bd9a8">XL-Type-v0.3.zip</code>, then click <strong style="color:#cfe0d6">Properties</strong>.</li>
+          <li>On the <em>General</em> tab, tick the <strong style="color:#cfe0d6">Unblock</strong> box near the bottom, then click <strong style="color:#cfe0d6">OK</strong>.</li>
+          <li>Now extract the zip.</li>
+        </ul>
+
+        <p style="margin:0 2px 8px;font:600 14px 'Chakra Petch',sans-serif;color:#cfe0d6">2. Check the hash (the workbook is macro-enabled — verify it before enabling macros)</p>
+        <ul style="margin:0;padding-left:20px;font:400 14px/1.7 'Chakra Petch',sans-serif;color:#93a49a">
+          <li>Open <strong style="color:#cfe0d6">PowerShell</strong> in the folder you extracted.</li>
+          <li>Run this command (hit <em>copy</em> to grab it):
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 4px">
+              <code id="hash-cmd" style="flex:1;min-width:230px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#9fada3;word-break:break-all;background:#05080699;padding:11px 13px;border:1px solid rgba(255,255,255,.08);border-radius:7px">Get-FileHash .\XL-Type-v0.3.xlsm -Algorithm SHA256</code>
+              <button id="copy-hash" type="button" class="copybtn">copy</button>
+            </div>
+          </li>
+          <li style="margin-top:6px">Check the <code style="font:400 12px 'JetBrains Mono',monospace;color:#8bd9a8">Hash</code> it prints matches this SHA-256:
+            <code id="hash-value" style="display:block;margin-top:8px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#9fada3;word-break:break-all;background:#05080699;padding:11px 13px;border:1px solid rgba(255,255,255,.08);border-radius:7px">0f60b6d83a4715d89225f5e980525e22ef9cb93aed536e26da4bfbccf757611f</code>
+          </li>
+          <li style="margin-top:8px">If they don't match, delete the file and download it again.</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -302,12 +318,12 @@
     stage.replaceChild(f, poster);
   });
 
-  // SHA-256 copy button with a brief "copied" confirmation.
+  // Copy the Get-FileHash COMMAND (not the hash) with a brief "copied" confirmation.
   var copyBtn = document.getElementById('copy-hash');
-  var hashText = document.getElementById('hash-value').textContent.trim();
+  var cmdText = document.getElementById('hash-cmd').textContent.trim();
   var copyTimer = null;
   copyBtn.addEventListener('click', function () {
-    try { if (navigator.clipboard) navigator.clipboard.writeText(hashText); } catch (_) {}
+    try { if (navigator.clipboard) navigator.clipboard.writeText(cmdText); } catch (_) {}
     copyBtn.textContent = '✓ copied';
     if (copyTimer) clearTimeout(copyTimer);
     copyTimer = setTimeout(function () { copyBtn.textContent = 'copy'; }, 1400);
