@@ -60,10 +60,66 @@
     "name": "XL-Type - An arcade shoot 'em up built inside Microsoft Excel - Release Trailer",
     "description": "Official trailer for XL-TYPE, a shoot 'em up built entirely inside Microsoft Excel.",
     "thumbnailUrl": "https://i.ytimg.com/vi/HiMwttel9kA/maxresdefault.jpg",
-    "uploadDate": "2026-07-12",
+    "uploadDate": "2026-07-12T12:00:00-04:00",
     "contentUrl": "https://www.youtube.com/watch?v=HiMwttel9kA",
     "embedUrl": "https://www.youtube-nocookie.com/embed/HiMwttel9kA"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it safe to enable macros on a workbook from the internet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Healthy skepticism is the right instinct — that's why the SHA-256 hash of every release is published on this page: verify your download matches before enabling anything. XL-Type is plain VBA with nothing hidden. Open the workbook (macros stay disabled until you click Enable Content), press Alt+F11, and the game's full source code is right there. It's admittedly a lot of code to read through by hand — if you'd rather not, paste it into an LLM and ask it to review what the code does. The game never connects to the internet and never reads or writes anything outside its own workbook."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does Excel show a security warning when I open it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Windows and Excel flag every macro-enabled file downloaded from the internet — it's a blanket policy (Mark of the Web), not a judgment about this file. The game is written in macros (VBA), so the warning is expected. Verify the hash, then click Enable Content on the yellow bar to start the game."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it really built entirely inside Excel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The playfield is worksheet cells being recoloured every frame, the game loop and all the logic are VBA, input is keyboard polling, and the sound plays through Windows audio calls made from VBA. No add-ins, no external engine, no companion programs — the entire game is one .xlsm workbook."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Completely. XL-Type is a free fan project, released under the GNU GPL v3-or-later license."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work on Mac, or Excel on the web?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No — Windows desktop Excel only. The game depends on Windows-specific APIs for keyboard input and sound, and Excel on the web can't run VBA at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will it change my Excel settings or touch my other spreadsheets?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. It draws only inside its own workbook, keeps high scores and settings on its own worksheet tabs, and restores your Excel view (ribbon, gridlines, zoom) on the way out. Your other files are never opened or modified."
+      }
+    }
+  ]
 }
 </script>
 <style>
@@ -90,6 +146,14 @@
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .footer-link{color:#6f7c73;text-decoration:underline}
   .footer-link:hover{color:#8bd9a8}
+  .faq-item{border:1px solid rgba(255,255,255,.08);border-radius:10px;background:linear-gradient(180deg,rgba(16,23,20,.95),rgba(9,13,11,.95));margin-bottom:12px}
+  .faq-item[open]{border-color:rgba(70,232,136,.25)}
+  .faq-item summary{cursor:pointer;padding:16px 20px;font:600 16px 'Chakra Petch',sans-serif;color:#dfe9e2;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .faq-item summary::-webkit-details-marker{display:none}
+  .faq-item summary::after{content:'+';font:600 18px 'JetBrains Mono',monospace;color:#5cae7f;flex-shrink:0}
+  .faq-item[open] summary::after{content:'−'}
+  .faq-item p{margin:0;padding:0 20px 18px;font:400 14px/1.7 'Chakra Petch',sans-serif;color:#93a49a}
+  .faq-item p+p{padding-top:0;margin-top:-8px}
 
   /* responsive */
   @media (max-width:760px){
@@ -282,6 +346,45 @@
         </ul>
       </div>
     </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" style="max-width:900px;margin:0 auto;padding:38px 32px 40px">
+    <div style="text-align:center;margin-bottom:40px">
+      <div style="font:600 13px 'JetBrains Mono',monospace;letter-spacing:.16em;color:#5cae7f">// FAQ</div>
+    </div>
+
+    <details class="faq-item">
+      <summary>Is it safe to enable macros on a workbook from the internet?</summary>
+      <p>Healthy skepticism is the right instinct — that's why the SHA-256 hash of every release is published above: verify your download matches before enabling anything.</p>
+      <p>XL-Type is plain VBA with nothing hidden. Open the workbook (macros stay disabled until you click Enable Content), press Alt+F11, and the game's full source code is right there. It's admittedly a lot of code to read through by hand — if you'd rather not, paste it into an LLM and ask it to review what the code does.</p>
+      <p>The game never connects to the internet and never reads or writes anything outside its own workbook.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why does Excel show a security warning when I open it?</summary>
+      <p>Windows and Excel flag every macro-enabled file downloaded from the internet — it's a blanket policy ("Mark of the Web"), not a judgment about this file. The game is written in macros (VBA), so the warning is expected. Verify the hash, then click Enable Content on the yellow bar to start the game.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is it really built entirely inside Excel?</summary>
+      <p>Yes. The playfield is worksheet cells being recoloured every frame, the game loop and all the logic are VBA, input is keyboard polling, and the sound plays through Windows audio calls made from VBA. No add-ins, no external engine, no companion programs — the entire game is one .xlsm workbook.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is it free?</summary>
+      <p>Completely. XL-Type is a free fan project, released under the GNU GPL v3-or-later license.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Does it work on Mac, or Excel on the web?</summary>
+      <p>No — Windows desktop Excel only. The game depends on Windows-specific APIs for keyboard input and sound, and Excel on the web can't run VBA at all.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary>Will it change my Excel settings or touch my other spreadsheets?</summary>
+      <p>No. It draws only inside its own workbook, keeps high scores and settings on its own worksheet tabs, and restores your Excel view (ribbon, gridlines, zoom) on the way out. Your other files are never opened or modified.</p>
+    </details>
   </section>
 
   <!-- ============ FOOTER ============ -->
