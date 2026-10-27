@@ -1,0 +1,24 @@
+XL-TYPE - Changelog
+===================
+
+v0.4 - 2026-10-26
+-----------------
+
+- All-new sound effects. Every sound is rebuilt from one shared chiptune
+  palette, replacing the mismatched set from earlier versions: a new
+  enemy-kill crunch, a softer FLASHFILL beam loop, and a lighter hit sound
+  when chipping away at the ###### column and #SPILL! parts.
+- "File Saved!" victory jingle. A chiptune fanfare now plays on the final
+  save message, replacing the confetti pops.
+- Smoother audio under heavy fire. Rapid hits no longer stall the frame.
+- More reliable auto-start. The game starts cleanly once macros are
+  enabled, and closing the workbook while it's starting up no longer
+  launches the game into a closing file.
+- Fresh first run. The download ships with an empty high-score table and
+  default settings, so you start on the board-fit screen.
+- The controls screen drops a redundant restart line.
+
+v0.3 - 2026-07-16
+-----------------
+
+- Previous release. No changelog was kept for v0.3 and earlier.
