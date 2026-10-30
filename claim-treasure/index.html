@@ -42,6 +42,11 @@ const TICK = ANIM_SCALE / 60;
 const SPAWN_TICKS = Math.round(SPAWN_GAP / TICK);  // between ants leaving a jar
 const READY_TICKS = 12;                            // a placed jar settling into its slot
 const DONE_TICKS = 21;                             // an empty jar popping before its slot frees
+// Blocks are drawn nearly flush so the picture reads as one image; ?classic brings
+// back the original rounded blocks with wider gaps.
+const CLASSIC = (() => {
+  try { return new URLSearchParams(location.search).has('classic'); } catch (e) { return false; }  // headless in tools/
+})();
 const GRID_MAX = 45;                          // largest picture side, in blocks
 const FONT = 'Fredoka, "Arial Rounded MT Bold", "Segoe UI", sans-serif';
 
@@ -1800,10 +1805,19 @@ function wrap(str, maxW, size) {
 }
 
 function drawBlock(g, x, y, s, c) {
+  if (!CLASSIC) return drawFlatBlock(g, x, y, s, c);
   const sh = SH[c], p = s * 0.05, bw = s - 2 * p, r = s * 0.2;
   g.fillStyle = sh.dark; rr(g, x + p, y + p, bw, bw, r); g.fill();
   g.fillStyle = sh.base; rr(g, x + p, y + p, bw, bw * 0.78, r); g.fill();
   g.fillStyle = 'rgba(255,255,255,0.28)'; rr(g, x + p + s * 0.14, y + p + s * 0.12, s * 0.34, s * 0.13, s * 0.065); g.fill();
+}
+// The default block: a hairline gap, barely rounded, with a thin shaded
+// bottom edge so neighbours of one color still read as separate blocks.
+function drawFlatBlock(g, x, y, s, c) {
+  const sh = SH[c], p = s * 0.03, bw = s - 2 * p, r = s * 0.1;
+  g.fillStyle = sh.dark; rr(g, x + p, y + p, bw, bw, r); g.fill();
+  g.fillStyle = sh.base; rr(g, x + p, y + p, bw, bw * 0.88, r); g.fill();
+  g.fillStyle = 'rgba(255,255,255,0.2)'; rr(g, x + p + s * 0.12, y + p + s * 0.1, s * 0.3, s * 0.1, s * 0.05); g.fill();
 }
 
 function renderBoard() {
